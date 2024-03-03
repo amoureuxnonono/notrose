@@ -1,0 +1,11 @@
+ssh-keygen -t rsa -C "maomaododo@hotmail.com"
+git clone https://github.com/amoureuxnonono/notrose-contracts.git
+cd notrose-contracts
+git remote rm origin
+git remote add origin https://github.com/amoureuxnonono/notrose-contracts.git
+git status
+git add 
+git commit -m ''
+git push origin main
+
+ 
