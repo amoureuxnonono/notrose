@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
+import "/MintNode.sol;"
+
 contract MintFactory is Ownable {
     mapping (uint256 => address[]) public Pools;
     mapping (uint256 => bool) public HasPool;
@@ -9,7 +11,7 @@ contract MintFactory is Ownable {
         uint256 _start,
         uint256 _count) external onlyOwner {
         require(!HasPool[_start]);
-        bytes memory bytecode = type(SyrupPool).creationCode;
+        bytes memory bytecode = type(MintNode).creationCode;
         HasPool[_start] = true;
         Pools[_start] = new address[](_count);
         address[] memory ps = Pools[_start];
@@ -30,7 +32,7 @@ contract MintFactory is Ownable {
         require(HasPool[_start]);
         address[] memory ps = Pools[_start];
         for(uint256 i = 0; i < ps.length; i++){
-            SyrupPool(ps[i]).mint();
+            MintNode(ps[i]).mint();
         }
     }
 
@@ -38,7 +40,7 @@ contract MintFactory is Ownable {
         require(HasPool[_start]);
         address[] memory ps = Pools[_start];
         for(uint256 i = 0; i < ps.length; i++){
-            SyrupPool(ps[i]).kill();
+            MintNode(ps[i]).kill();
         }
     }
 }
